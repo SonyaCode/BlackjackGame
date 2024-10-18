@@ -1,5 +1,15 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
 
+
+body {
+    font-family: "Afacad Flux", sans-serif;
+    background-image: url("/images/table.png");
+    color: white;
+
+    font-weight: 500;
+    text-align: center;
+    height: 100vh;
+    background-size: cover;
 }
 
 h1 {
@@ -7,5 +17,16 @@ h1 {
 }
 
 #message-el {
-    
+    font-style: italic;
+}
+
+button {
+    background-color: goldenrod;
+    color: green;
+    font-weight: 600;
+    padding: 3px 50px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
 }
