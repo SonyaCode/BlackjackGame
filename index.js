@@ -7,41 +7,64 @@ let messageEl = document.getElementById("message-el");
 let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el");
 // variables representing two cards 
-let firstCard;
-let secondCard;
-let sum;
+let sum = 0;
+let player = document.getElementById("player-el");
+
+// display player's name
+let name = prompt("Enter your name")
+player.textContent = "Player: " + name;
+// display player's win
+let wins = 0;
+
 
 
 function renderGame() {
+    // resetting the sum and cardsEl text to prevent duplicate
+    sum = 0;
+    cardsEl.textContent = "Cards: ";
+
+    // add all the cards in the list to cardsEl and add the card number to the sum
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += " " + cards[i]
+        sum += cards[i]
+        console.log(cards)
+        
     }
 
-    sum = firstCard + secondCard
-    sumEl.innerHTML = sum;
+    sumEl.textContent = "Sum: " + sum;
 
     if (sum < 21) {
         message = "Do you want to draw a new card? 🙂"
     } else if (sum == 21) {
         message = "Wohoo! You've got Blackjack! 🥳"
+        hasBlackjack = true;
+        wins++;
+        document.getElementById("num-of-wins").textContent = "Total wins: " + wins
     } else {
         message = "You're out of the game! 😭"
+        isAlive = false;
     }
 
     messageEl.innerText = message;
 }
 
-function newCard() {
-    let card = getRandomCard();
-    sum += card;
-    cards.push(card);
-    renderGame();
+function newCard(element) {
+    // will only add card if the game is NOT over
+    if (isAlive && !hasBlackjack) {
+        let card = getRandomCard();
+        cards.push(card);
+        renderGame();
+    }  
 }
 
 function startGame() {
+    // reset cards list
+    cards = [];
     isAlive = true;
-    firstCard = getRandomCard();
-    secondCard = getRandomCard();
+    hasBlackjack = false;
+    // generate and add two cards to the cards list
+    let firstCard = getRandomCard();
+    let secondCard = getRandomCard();
     cards.push(firstCard);
     cards.push(secondCard);
     renderGame();
