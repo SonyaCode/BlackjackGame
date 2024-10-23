@@ -11,11 +11,17 @@ let sum = 0;
 let player = document.getElementById("player-el");
 
 // display player's name
-let name = prompt("Enter your name")
-player.textContent = "Player: " + name;
-// display player's win
-let wins = 0;
+if (!localStorage.player) {
+    localStorage.player = prompt("Enter your name")
 
+}
+player.textContent = "Player: " + localStorage.player;
+// display player's win
+// let wins = 0;
+
+if (!localStorage.wins) {
+    localStorage.wins = 0;
+}
 
 
 function renderGame() {
@@ -27,8 +33,6 @@ function renderGame() {
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += " " + cards[i]
         sum += cards[i]
-        console.log(cards)
-        
     }
 
     sumEl.textContent = "Sum: " + sum;
@@ -38,13 +42,13 @@ function renderGame() {
     } else if (sum == 21) {
         message = "Wohoo! You've got Blackjack! 🥳"
         hasBlackjack = true;
-        wins++;
-        document.getElementById("num-of-wins").textContent = "Total wins: " + wins
+        localStorage.wins++;
     } else {
         message = "You're out of the game! 😭"
         isAlive = false;
     }
 
+    document.getElementById("num-of-wins").textContent = "Total wins: " + localStorage.wins
     messageEl.innerText = message;
 }
 
